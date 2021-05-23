@@ -65,8 +65,7 @@ public class Main {
                 "sp: spicy\n" +
                 "la: lamb\n" +
                 "hm: homemade");
-        // TODO: Add a Hamburger Factory and use it to create a Hamburger
-        Hamburger hamburger = null;
+        Hamburger hamburger = HamburgerFactory.createHamburger(scanner.nextLine());
 
         String choice="";
         while (!choice.equals("s")) {
