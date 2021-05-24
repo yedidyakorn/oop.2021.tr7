@@ -35,6 +35,7 @@ public class Main {
     public static void fileMenu(Scanner scanner) throws IOException {
         String path="files.txt";
         FileDetails root= readFileDetails(path);
+        FileCount fileCount =new FileCount();
         System.out.println("Choose from the following options:\n" +
                 "q: quit\n" +
                 "c: countFiles\n" +
@@ -45,6 +46,7 @@ public class Main {
         while (!(myString = scanner.nextLine()).equals("q")){
             switch (myString){
                 case "c":
+                    root.accept(fileCount);
                     //TODO: Add counting behavior
                     break;
                 case "sz":
