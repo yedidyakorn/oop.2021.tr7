@@ -47,7 +47,7 @@ public class Main {
             switch (myString){
                 case "c":
                     root.accept(fileCount);
-                    //TODO: Add counting behavior
+                    System.out.println("Found "+fileCount.getSum()+" files");
                     break;
                 case "sz":
                     //TODO: Add size calculation behavior

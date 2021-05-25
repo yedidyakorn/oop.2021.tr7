@@ -1,43 +1,37 @@
 public class FileCount implements FileVisitor {
+
+    private int sum=0;
+    public int getSum() {return sum;}
     @Override
     public void visit(DocxFileDetails d) {
-        return ;
+        sum++;
     }
 
     @Override
     public void visit(HtmlFileDetails h) {
-        return;
+        sum++;
     }
 
     @Override
     public void visit(JpgFileDetails j) {
-        return;
+        sum++;
     }
 
     @Override
     public void visit(Mp3FileDetails m) {
-        return;
+        sum++;
     }
 
     @Override
     public void visit(PptxFileDetails p) {
-        return;
+        sum++;
     }
 
     @Override
     public void visit(TxtFileDetails t) {
-        return;
+        sum++;
     }
 
     @Override
-    public void visit(DirectoryDetails d) {
-        int sum = 0;
-        for(FileDetails f: d.getList()){
-            if (f.getClass().getName()!="DirectoryDetails")
-                sum++;
-            else
-                f.accept(this);
-        }
-        System.out.println("Found "+sum+"  files");
-    }
+    public void visit(DirectoryDetails d) { }
 }

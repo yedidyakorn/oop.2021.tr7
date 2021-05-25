@@ -14,6 +14,7 @@ public class DirectoryDetails extends FileDetails {
             f.accept(fileVisitor);
         }
         fileVisitor.visit(this);
+
     }
 
     public void addFile(FileDetails fileDetails){
