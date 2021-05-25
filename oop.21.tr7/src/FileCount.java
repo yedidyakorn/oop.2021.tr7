@@ -1,7 +1,11 @@
 public class FileCount implements FileVisitor {
 
-    private int sum=0;
-    public int getSum() {return sum;}
+    private int sum = 0;
+
+    public int getSum() {
+        return sum;
+    }
+
     @Override
     public void visit(DocxFileDetails d) {
         sum++;
@@ -13,9 +17,7 @@ public class FileCount implements FileVisitor {
     }
 
     @Override
-    public void visit(JpgFileDetails j) {
-        sum++;
-    }
+    public void visit(JpgFileDetails j) { sum++; }
 
     @Override
     public void visit(Mp3FileDetails m) {
@@ -33,5 +35,5 @@ public class FileCount implements FileVisitor {
     }
 
     @Override
-    public void visit(DirectoryDetails d) { }
+    public void visit(DirectoryDetails d) {  }
 }

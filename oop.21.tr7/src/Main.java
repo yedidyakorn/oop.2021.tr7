@@ -36,6 +36,9 @@ public class Main {
         String path="files.txt";
         FileDetails root= readFileDetails(path);
         FileCount fileCount =new FileCount();
+        ShortPrint shortPrint =new ShortPrint();
+        SizeCalc sizeCalc =new SizeCalc();
+        FileStas fileStas =new FileStas();
         System.out.println("Choose from the following options:\n" +
                 "q: quit\n" +
                 "c: countFiles\n" +
@@ -50,13 +53,14 @@ public class Main {
                     System.out.println("Found "+fileCount.getSum()+" files");
                     break;
                 case "sz":
-                    //TODO: Add size calculation behavior
+                    root.accept(sizeCalc);
+                    System.out.println("the total size is "+sizeCalc.getSize()+" bytes");
                     break;
                 case "st":
-                    //TODO: Add statistics behavior
+                    root.accept(fileStas);
                     break;
                 case "sh":
-                    //TODO: Add short representation behavior
+                    root.accept(shortPrint);
             }
         }
     }

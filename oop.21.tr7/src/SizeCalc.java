@@ -1,36 +1,40 @@
-public class ShortPrint implements FileVisitor {
+public class SizeCalc implements FileVisitor {
+
+    private int sum = 0;
+
+    public int getSize() {
+        return sum;
+    }
     @Override
     public void visit(DocxFileDetails d) {
-        System.out.println(d.getName());
+        sum+=d.getSize();
     }
 
     @Override
     public void visit(HtmlFileDetails h) {
-        System.out.println(h.getName());
+        sum+=h.getSize();
     }
 
     @Override
     public void visit(JpgFileDetails j) {
-        System.out.println(j.getName());
+        sum+=j.getSize();
     }
 
     @Override
     public void visit(Mp3FileDetails m) {
-        System.out.println(m.getName());
+        sum+=m.getSize();
     }
 
     @Override
     public void visit(PptxFileDetails p) {
-        System.out.println(p.getName());
+        sum+=p.getSize();
     }
 
     @Override
     public void visit(TxtFileDetails t) {
-        System.out.println(t.getName());
+        sum+=t.getSize();
     }
 
     @Override
-    public void visit(DirectoryDetails d) {
-        System.out.println(d.getName());
-    }
+    public void visit(DirectoryDetails d) {  }
 }
