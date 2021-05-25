@@ -10,36 +10,37 @@ public class FileDetailsFactory {
     private final static String PPTX_CAPTURE_PATTERN = "(.*/)?([^ /]*) slides: (\\d+), (\\d+) bytes";
     private final static String DOCX_CAPTURE_PATTERN = "(.*/)?([^ /]*) words: (\\d+), pages: (\\d+), (\\d+) bytes";
     private final static String DIRECTORY_CAPTURE_PATTERN = "(.*/)?([^ /]*)";
-    public static FileDetails getFileDetails(String description){
+
+    public static FileDetails getFileDetails(String description) {
         Matcher matcher;
-        switch (getExtension(description)){
+        switch (getExtension(description)) {
             case "":
-                matcher=getMatcher(DIRECTORY_CAPTURE_PATTERN, description);
+                matcher = getMatcher(DIRECTORY_CAPTURE_PATTERN, description);
                 return new DirectoryDetails(matcher.group(1), matcher.group(2));
             case "mp3":
-                matcher=getMatcher(MP3_CAPTURE_PATTERN, description);
+                matcher = getMatcher(MP3_CAPTURE_PATTERN, description);
                 return new Mp3FileDetails(matcher.group(1), matcher.group(2),
-                        Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                        Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
             case "jpg":
-                matcher=getMatcher(JPG_CAPTURE_PATTERN, description);
+                matcher = getMatcher(JPG_CAPTURE_PATTERN, description);
                 return new JpgFileDetails(matcher.group(1), matcher.group(2),
                         Integer.parseInt(matcher.group(3)),
                         Integer.parseInt(matcher.group(4)),
                         Integer.parseInt(matcher.group(5)));
             case "html":
-                matcher=getMatcher(HTML_CAPTURE_PATTERN, description);
+                matcher = getMatcher(HTML_CAPTURE_PATTERN, description);
                 return new HtmlFileDetails(matcher.group(1), matcher.group(2),
-                        Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                        Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
             case "pptx":
-                matcher=getMatcher(PPTX_CAPTURE_PATTERN, description);
+                matcher = getMatcher(PPTX_CAPTURE_PATTERN, description);
                 return new PptxFileDetails(matcher.group(1), matcher.group(2),
-                        Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                        Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
             case "txt":
-                matcher=getMatcher(TXT_CAPTURE_PATTERN, description);
+                matcher = getMatcher(TXT_CAPTURE_PATTERN, description);
                 return new TxtFileDetails(matcher.group(1), matcher.group(2),
-                        Integer.parseInt(matcher.group(3)),Integer.parseInt(matcher.group(4)));
+                        Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
             case "docx":
-                matcher=getMatcher(DOCX_CAPTURE_PATTERN, description);
+                matcher = getMatcher(DOCX_CAPTURE_PATTERN, description);
                 return new DocxFileDetails(matcher.group(1), matcher.group(2),
                         Integer.parseInt(matcher.group(3)),
                         Integer.parseInt(matcher.group(4)),
@@ -47,11 +48,13 @@ public class FileDetailsFactory {
         }
         throw new RuntimeException("wrong file type");
     }
-    public static String getExtension(String fileDescription){
-        String extention = getMatcher(EXTENTION_CAPTURE_PATTERN,fileDescription).group(1);
-        return extention== null ? "" : extention.substring(1);
+
+    public static String getExtension(String fileDescription) {
+        String extention = getMatcher(EXTENTION_CAPTURE_PATTERN, fileDescription).group(1);
+        return extention == null ? "" : extention.substring(1);
     }
-    public static Matcher getMatcher(String regex, String toMatch){
+
+    public static Matcher getMatcher(String regex, String toMatch) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(toMatch);
         matcher.find();

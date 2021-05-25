@@ -14,31 +14,33 @@ public class Main {
                 "f: FileDetails\n" +
                 "h: Hamburgers");
         String choice = scanner.nextLine();
-        if (choice.equals("f")){
+        if (choice.equals("f")) {
             fileMenu(scanner);
         }
-        if (choice.equals("h")){
+        if (choice.equals("h")) {
             hamburgerMenu(scanner);
         }
     }
+
     public static FileDetails readFileDetails(String path) throws IOException {
-        Map<String, FileDetails> files = new HashMap();
-        DirectoryDetails root=new DirectoryDetails(null, "root");
+        Map<String, FileDetails> files = new HashMap<>();
+        DirectoryDetails root = new DirectoryDetails(null, "root");
         files.put("", root);
         Files.lines(Paths.get(path))
                 .map(str -> FileDetailsFactory.getFileDetails(str))
-                .peek(f -> files.put(f.getFullName(),f))
-                .peek(f -> ((DirectoryDetails)files.get(f.getPath())).addFile(f))
+                .peek(f -> files.put(f.getFullName(), f))
+                .peek(f -> ((DirectoryDetails) files.get(f.getPath())).addFile(f))
                 .collect(Collectors.toList());
         return root;
     }
+
     public static void fileMenu(Scanner scanner) throws IOException {
-        String path="files.txt";
-        FileDetails root= readFileDetails(path);
-        FileCount fileCount =new FileCount();
-        ShortPrint shortPrint =new ShortPrint();
-        SizeCalc sizeCalc =new SizeCalc();
-        FileStas fileStas =new FileStas();
+        String path = "files.txt";
+        FileDetails root = readFileDetails(path);
+        FileCount fileCount = new FileCount();
+        ShortPrint shortPrint = new ShortPrint();
+        SizeCalc sizeCalc = new SizeCalc();
+        FileStas fileStas = new FileStas();
         System.out.println("Choose from the following options:\n" +
                 "q: quit\n" +
                 "c: countFiles\n" +
@@ -46,15 +48,15 @@ public class Main {
                 "sh: short\n" +
                 "sz: size");
         String myString;
-        while (!(myString = scanner.nextLine()).equals("q")){
-            switch (myString){
+        while (!(myString = scanner.nextLine()).equals("q")) {
+            switch (myString) {
                 case "c":
                     root.accept(fileCount);
-                    System.out.println("Found "+fileCount.getSum()+" files");
+                    System.out.println("Found " + fileCount.getSum() + " files");
                     break;
                 case "sz":
                     root.accept(sizeCalc);
-                    System.out.println("the total size is "+sizeCalc.getSize()+" bytes");
+                    System.out.println("the total size is " + sizeCalc.getSize() + " bytes");
                     break;
                 case "st":
                     root.accept(fileStas);
@@ -65,7 +67,7 @@ public class Main {
         }
     }
 
-    public static void hamburgerMenu(Scanner scanner){
+    public static void hamburgerMenu(Scanner scanner) {
         System.out.println("Choose from the following hamburgers:\n" +
                 "cl: classic\n" +
                 "sp: spicy\n" +
@@ -73,7 +75,7 @@ public class Main {
                 "hm: homemade");
         Hamburger hamburger = HamburgerFactory.createHamburger(scanner.nextLine());
 
-        String choice="";
+        String choice = "";
         while (!choice.equals("s")) {
             System.out.println("Choose from the following options:\n" +
                     "a: add topping\n" +
@@ -87,16 +89,14 @@ public class Main {
 
             }
         }
-
-
     }
-    public static Hamburger toppingMenu(Scanner scanner, Hamburger hamburger){
+
+    public static Hamburger toppingMenu(Scanner scanner, Hamburger hamburger) {
         System.out.println("Choose from the following toppings:\n" +
                 "ch: chips\n" +
                 "or: onion rings\n" +
                 "sa: salad\n" +
-                "fe: friedEgg");
-        // TODO: Add a Hamburger-Topping Factory and use it to create a decorated Hamburger
-        return null;
+                "fe: fried egg");
+        return ToppingFactory.createTopping(scanner.nextLine(), hamburger);
     }
 }
