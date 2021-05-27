@@ -3,7 +3,9 @@ public class FileCount implements FileVisitor {
     private int sum = 0;
 
     public int getSum() {
-        return sum;
+        int temp=sum;
+        sum=0;
+        return temp;
     }
 
     @Override
